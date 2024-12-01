@@ -5,7 +5,6 @@ sudo dnf install git -y # Needed for cloning of the Hyprland repos
 sudo dnf install -y gcc-c++ \
                     g++ \
                     meson \
-                    cmake \
                     "pkgconfig(cairo)" \
                     "pkgconfig(egl)" \
                     "pkgconfig(gbm)" \
@@ -41,51 +40,52 @@ sudo dnf install -y gcc-c++ \
                     "pkgconfig(libdisplay-info)" \
                     "pkgconfig(hwdata)"
 
-mkdir /old-usr
-cp /usr/* -R /old-usr
+git clone https://github.com/Kitware/CMake /tmp/CMake
+cd /tmp/CMake
+./bootstrap
+make
+make install
 
-git clone https://github.com/hyprwm/hyprwayland-scanner /Source/hyprwayland-scanner
-cd /Source/hyprwayland-scanner
+git clone https://github.com/hyprwm/hyprwayland-scanner /tmp/hyprwayland-scanner
+cd /tmp/hyprwayland-scanner
 cmake -DCMAKE_INSTALL_PREFIX=/usr -B build
 cmake --build build
 cmake --install build
-cd /Source
+cd /tmp
 
-git clone https://github.com/hyprwm/hyprutils /Source/hyprutils
-cd /Source/hyprutils
+git clone https://github.com/hyprwm/hyprutils /tmp/hyprutils
+cd /tmp/hyprutils
 cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr -S . -B build
 cmake --build ./build --config Release --target all
 cmake --install build
-cd /Source
+cd /tmp
 
-git clone https://github.com/hyprwm/aquamarine /Source/aquamarine
-cd /Source/aquamarine
+git clone https://github.com/hyprwm/aquamarine /tmp/aquamarine
+cd /tmp/aquamarine
 cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr -S . -B build
 cmake --build ./build --config Release --target all
 cmake --install build
-cd /Source
+cd /tmp
 
-git clone https://github.com/hyprwm/hyprlang /Source/hyprlang
-cd /Source/hyprlang
+git clone https://github.com/hyprwm/hyprlang /tmp/hyprlang
+cd /tmp/hyprlang
 cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr -S . -B build
 cmake --build ./build --config Release --target hyprlang
 cmake --install build
-cd /Source
+cd /tmp
 
-git clone https://github.com/hyprwm/hyprcursor /Source/hyprcursor
-cd /Source/hyprcursor
+git clone https://github.com/hyprwm/hyprcursor /tmp/hyprcursor
+cd /tmp/hyprcursor
 cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr -S . -B build
 cmake --build ./build --config Release --target all
 cmake --install build
-cd /Source
+cd /tmp
 
-git clone https://github.com/hyprwm/Hyprland --recursive /Source/Hyprland
-cd /Source/Hyprland
+git clone https://github.com/hyprwm/Hyprland --recursive /tmp/Hyprland
+cd /tmp/Hyprland
 export CXXFLAGS=-std=gnu++26
 export CXX=/usr/bin/g++
 export CC=/usr/bin/gcc
 make all
 make install
-cd /Source
-
-rm /Source -fr
+cd /tmp
