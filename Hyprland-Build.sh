@@ -5,6 +5,8 @@ sudo dnf install git -y # Needed for cloning of the Hyprland repos
 sudo dnf install -y gcc-c++ \
                     g++ \
                     meson \
+                    pkg-config \
+                    openssl-devel \
                     "pkgconfig(cairo)" \
                     "pkgconfig(egl)" \
                     "pkgconfig(gbm)" \
