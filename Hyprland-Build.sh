@@ -83,6 +83,13 @@ cmake --build ./build --config Release --target all
 cmake --install build
 cd /tmp
 
+git clone https://github.com/hyprwm/hyprgraphics /tmp/hyprgraphics
+cd /tmp/hyprgraphics
+cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr -S . -B build
+cmake --build ./build --config Release --target all
+cmake --install build
+cd /tmp
+
 git clone https://github.com/hyprwm/Hyprland --recursive /tmp/Hyprland
 cd /tmp/Hyprland
 export CXXFLAGS=-std=gnu++26
