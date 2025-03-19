@@ -40,7 +40,9 @@ sudo dnf install -y gcc-c++ \
                     "pkgconfig(libliftoff)" \
                     "pkgconfig(xcb-util)" \
                     "pkgconfig(libdisplay-info)" \
-                    "pkgconfig(hwdata)"
+                    "pkgconfig(hwdata)" \
+                    "pkgcongig(libmagic)" \
+                    "pkgconfig(spng)" 
 
 git clone https://github.com/Kitware/CMake /tmp/CMake
 cd /tmp/CMake
