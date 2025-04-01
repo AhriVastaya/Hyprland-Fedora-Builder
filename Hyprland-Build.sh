@@ -1,8 +1,8 @@
 sed -i 's/enabled=1/enabled=0/g' /etc/yum.repos.d/fedora-cisco-openh264.repo # Unneeded Repo
 dnf upgrade -y
-sudo dnf install git -y # Needed for cloning of the Hyprland repos
+dnf install git -y # Needed for cloning of the Hyprland repos
 
-sudo dnf install -y gcc-c++ \
+dnf install -y gcc-c++ \
                     g++ \
                     meson \
                     pkg-config \
@@ -43,13 +43,22 @@ sudo dnf install -y gcc-c++ \
                     "pkgconfig(hwdata)" \
                     "pkgconfig(libmagic)" \
                     "pkgconfig(spng)" \
-                    "pkgconfig(re2)"
+                    "pkgconfig(re2)" \
+                    "pkgconfig(scdoc)"
 
 git clone https://github.com/Kitware/CMake /tmp/CMake
 cd /tmp/CMake
 ./bootstrap
 make
 make install
+
+git clone https://git.sr.ht/~kennylevinsen/seatd /tmp/seatd
+cd /tmp/seatd
+mkdir build
+meson setup --prefix=/usr --buildtype=plain -Dexamples="disabled" -Dserver="enabled" -Dlibseat-logind="systemd" -Dman-pages="enabled" . build
+ninja -C build
+ninja -C build install
+cd /tmp
 
 git clone https://github.com/hyprwm/hyprwayland-scanner /tmp/hyprwayland-scanner
 cd /tmp/hyprwayland-scanner
