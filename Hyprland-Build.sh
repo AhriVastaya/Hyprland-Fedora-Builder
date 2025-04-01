@@ -44,7 +44,8 @@ dnf install -y gcc-c++ \
                     "pkgconfig(libmagic)" \
                     "pkgconfig(spng)" \
                     "pkgconfig(re2)" \
-                    "pkgconfig(scdoc)"
+                    "pkgconfig(scdoc)" \
+                    qt6-qtbase-devel
 
 git clone https://github.com/Kitware/CMake /tmp/CMake
 cd /tmp/CMake
@@ -109,4 +110,18 @@ export CXX=/usr/bin/g++
 export CC=/usr/bin/gcc
 make all
 make install
+cd /tmp
+
+git clone https://github.com/hyprwm/hyprland-qt-support
+cd /tmp/hyprgraphics
+cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr -S . -B build
+cmake --build ./build --config Release --target all
+cmake --install build
+cd /tmp
+
+git clone https://github.com/hyprwm/hyprland-qtutils
+cd /tmp/hyprgraphics
+cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr -S . -B build
+cmake --build ./build --config Release --target all
+cmake --install build
 cd /tmp
