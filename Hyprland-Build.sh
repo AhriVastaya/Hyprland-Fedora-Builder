@@ -123,5 +123,5 @@ git clone https://github.com/hyprwm/hyprland-qtutils
 cd /tmp/hyprgraphics
 cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr -S . -B build
 cmake --build ./build --config Release --target all
-cmake --install build
+cmake --build install
 cd /tmp
