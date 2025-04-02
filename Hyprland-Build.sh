@@ -119,9 +119,9 @@ cmake --build ./build --config Release --target all
 cmake --install build
 cd /tmp
 
-git clone https://github.com/hyprwm/hyprland-qtutils
-cd /tmp/hyprgraphics
+git clone https://github.com/hyprwm/hyprland-qtutils /tmp/hyprland-qtutils
+cd /tmp/hyprland-qtutils
 cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr -S . -B build
 cmake --build ./build --config Release --target all
-cmake --build install
+cmake --install build
 cd /tmp
